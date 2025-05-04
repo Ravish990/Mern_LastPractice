@@ -1,8 +1,8 @@
 import React from 'react'
 import Product from './components/products'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import SignIn from './components/user/signIn'
-import SignUp from './components/user/signUp'
+import SignIn from './components/signIn'
+import SignUp from './components/signUp'
 
 const App = () => {
   return (
