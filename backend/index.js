@@ -11,7 +11,12 @@ const cors = require('cors');
 connectDb();
 
 const app = express();
-app.use(cors());
+const allowedOrigins = ['http://localhost:5173', 'https://yourfrontend.onrender.com'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
