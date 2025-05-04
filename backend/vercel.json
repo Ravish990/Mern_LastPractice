@@ -20,10 +20,5 @@
         "src": "/(.*)",
         "dest": "/frontend/$1"
       }
-    ],
-    "env": {
-      "TOKEN_SECRET": "@token_secret",
-      "MONGO_URL": "@mongo_uri"
-    }
+    ]
   }
-  
