@@ -20,5 +20,10 @@
         "src": "/(.*)",
         "dest": "/frontend/$1"
       }
-    ]
+    ],
+    "env": {
+      "TOKEN_SECRET": "mongodb://localhost:27017/practice-mern",
+      "MONGO_URL": "helloiamravish"
+    }
   }
+  
