@@ -9,9 +9,9 @@ const Product = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // Change the URL to `/products` without `/api`
-        const response = await axios.get('http://localhost:3000/');
-        setProducts(response.data.data);  // Adjust based on your backend's response
+        
+        const response = await axios.get('http://localhost:3000/products');
+        setProducts(response.data.data);
       } catch (err) {
         console.error('Failed to fetch products:', err);
       }

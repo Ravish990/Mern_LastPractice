@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send('Server is running!');
 });
 
-app.use('/product', productRoutes)
+app.use('/products', productRoutes)
 
 app.use('/user',userRoutes)
 
