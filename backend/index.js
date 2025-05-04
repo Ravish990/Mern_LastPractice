@@ -16,11 +16,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('/check', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Server is running!');
 });
 
-app.use('/', productRoutes)
+app.use('/product', productRoutes)
 
 app.use('/user',userRoutes)
 
