@@ -11,10 +11,10 @@ const cors = require('cors');
 connectDb();
 
 const app = express();
-const allowedOrigins = ['http://localhost:5173', 'https://yourfrontend.onrender.com'];
+
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 const PORT = process.env.PORT || 3000;
