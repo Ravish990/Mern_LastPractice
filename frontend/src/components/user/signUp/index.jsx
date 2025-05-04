@@ -12,7 +12,7 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/user/signUp', {
+      const response = await axios.post('https://mern-lastpractice-3.onrender.com/user/signUp', {
         name,
         email,
         password,

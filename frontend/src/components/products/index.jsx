@@ -10,7 +10,7 @@ const Product = () => {
     const fetchProduct = async () => {
       try {
         
-        const response = await axios.get('http://localhost:3000/products');
+        const response = await axios.get('https://mern-lastpractice-3.onrender.com/products');
         setProducts(response.data.data);
       } catch (err) {
         console.error('Failed to fetch products:', err);
