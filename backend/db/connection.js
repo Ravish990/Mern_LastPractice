@@ -1,33 +1,41 @@
 const mongoose = require('mongoose');
 
-// Remove relative path - not needed in serverless and can cause issues
-require('dotenv').config();
+let cached = global.mongoose;
 
-// Fix variable name to match case exactly (URL not URl)
-const MONGO_URL = process.env.MONGO_URL;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
-// Add error handling and logging
 const connectDb = async () => {
-  try {
-    // Log for debugging (will appear in Vercel logs)
-    console.log('Attempting to connect to MongoDB...');
-    console.log('MONGO_URL exists:', !!MONGO_URL);
-    
-    if (!MONGO_URL) {
-      throw new Error('MONGO_URL environment variable is not defined');
-    }
-    
-    await mongoose.connect(MONGO_URL, {
+  if (cached.conn) {
+    console.log('Using cached MongoDB connection');
+    return cached.conn;
+  }
+
+  const MONGO_URL = process.env.MONGO_URL;
+
+  if (!MONGO_URL) {
+    console.error('MONGO_URL is not defined');
+    return null;
+  }
+
+  if (!cached.promise) {
+    console.log('Creating new MongoDB connection');
+    cached.promise = mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+    }).then((mongoose) => {
+      return mongoose;
     });
-    
-    console.log('MongoDB connection successful!');
-    return true;
-  } catch (error) {
-    console.error('MongoDB connection error:', error.message);
-    // Return false but don't throw - this prevents app crash
-    return false;
+  }
+
+  try {
+    cached.conn = await cached.promise;
+    console.log('MongoDB connected successfully');
+    return cached.conn;
+  } catch (e) {
+    console.error('MongoDB connection failed:', e.message);
+    return null;
   }
 };
 
